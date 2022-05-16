@@ -1,0 +1,35 @@
+package _Self.buildTypes
+
+import jetbrains.buildServer.configs.kotlin.*
+import jetbrains.buildServer.configs.kotlin.buildSteps.maven
+import jetbrains.buildServer.configs.kotlin.triggers.vcs
+
+object Mavenbuild : BuildType({
+    name = "mavenbuild"
+
+    vcs {
+        root(HttpsGithubComDivyasadhankarMavenProjectGitRefsHeadsMain)
+    }
+    steps {
+        maven {
+            name = "maven compile"
+            goals = "compile"
+        }
+        maven {
+            name = "maven test"
+            goals = "test"
+        }
+        maven {
+            name = "maven package"
+            goals = "package"
+        }
+        maven {
+            name = "maven install"
+            goals = "install"
+        }
+    }
+    triggers {
+        vcs {
+        }
+    }
+})
